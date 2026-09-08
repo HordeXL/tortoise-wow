@@ -1,6 +1,9 @@
 
 # Tortoise-WoW
 
+> [!WARNING]
+> **Project status — winding down (September 2026).** This fork is being retired. Through 30 September 2026 it will be kept in sync **only** with upstream [Penqle/tortoise-wow](https://github.com/Penqle/tortoise-wow) changes — no further work of our own. After that it will be **discontinued and archived** (read-only).
+
 This is an unofficial, community-driven restoration of the 1.18.1 patch of Turtle-WoW, with some additions to allow for customization.  
 Do not represent this project, or anyone using it, as the original creators.  
 This project targets version 1.18.1 build 7272.
