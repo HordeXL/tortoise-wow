@@ -22,4 +22,9 @@ endif()
 add_subdirectory(g3dlite)
 if(WIN32)
     add_subdirectory(zlib)
+    # gsoap runtime linked from source on Windows: the checked-in
+    # libgsoap++.a under dep/lib/gsoap is a Linux archive (ELF objects) that
+    # MSVC's linker cannot read. The vendored stdsoap2.cpp carries the same
+    # 2.8.135 runtime the archive was built from.
+    add_subdirectory(gsoap)
 endif()

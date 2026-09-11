@@ -160,12 +160,19 @@ target_link_libraries(${EXECUTABLE_NAME}
 )
 
 # SOAP remote-command interface: vendored gsoap C++ runtime (2.8.135).
-# Linux-only (vendored static lib); guard behind ENABLE_SOAP so Windows can build.
 if(ENABLE_SOAP)
   target_compile_definitions(${EXECUTABLE_NAME} PRIVATE ENABLE_SOAP)
-  target_link_libraries(${EXECUTABLE_NAME}
-      ${CMAKE_SOURCE_DIR}/dep/lib/gsoap/libgsoap++.a
-  )
+  if(WIN32)
+    # The checked-in libgsoap++.a is a Linux ELF archive MSVC cannot read;
+    # build the vendored runtime from source instead (dep/src/gsoap).
+    target_link_libraries(${EXECUTABLE_NAME}
+        gsoap
+    )
+  else()
+    target_link_libraries(${EXECUTABLE_NAME}
+        ${CMAKE_SOURCE_DIR}/dep/lib/gsoap/libgsoap++.a
+    )
+  endif()
 endif()
 
 # Boost lib search path for playerbots' transitive boost references.

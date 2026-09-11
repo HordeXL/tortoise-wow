@@ -29,7 +29,10 @@ foreach(PB_TARGET modules modules_playerbots mod_mod_playerbots mod_mod-playerbo
   #   MANGOSBOT_ZERO  - Classic (1.12). Switches level caps, talent trees,
   #                     spell ranges. MANGOSBOT_ONE for TBC, _TWO for WotLK.
   #   ENABLE_PLAYERBOTS - the vendor tree's own on/off wall.
-  target_compile_definitions(${PB_TARGET} PRIVATE CMANGOS MANGOSBOT_ZERO ENABLE_PLAYERBOTS)
+  # BOOST_ALL_NO_LIB: Boost 1.75 auto-link injects #pragma comment(lib,
+  # "libboost_*-vc142-...") (static names) that do not exist here (the
+  # prebuilt libs are vc141 import libs, linked explicitly by CMake).
+  target_compile_definitions(${PB_TARGET} PRIVATE CMANGOS MANGOSBOT_ZERO ENABLE_PLAYERBOTS BOOST_ALL_NO_LIB)
 
   # The vendored sources were built with botpch.h. Besides speeding up their
   # build, it is their common compatibility boundary: cmangos-compat-shim.h
